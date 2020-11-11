@@ -13,10 +13,7 @@ createMovie = (req, res) => {
   const movie = new Movie(body);
 
   if (!movie) {
-    return res.status(400).json({
-      success: false,
-      error: err
-    });
+    return res.status(400).json({ success: false, error: err });
   }
 
   movie
@@ -25,7 +22,7 @@ createMovie = (req, res) => {
       return res.status(201).json({
         success: true,
         id: movie._id,
-        message: "Move created!"
+        message: "Movie created!"
       });
     })
     .catch((error) => {
@@ -66,7 +63,7 @@ updateMovie = async (req, res) => {
         });
       })
       .catch((error) => {
-        return res.status(400).json({
+        return res.status(404).json({
           error,
           message: "Movie not updated!"
         });
@@ -81,7 +78,7 @@ deleteMovie = async (req, res) => {
     }
 
     if (!movie) {
-      return res.status(404).json({ success: false, error: "Movie not found" });
+      return res.status(404).json({ success: false, error: `Movie not found` });
     }
 
     return res.status(200).json({ success: true, data: movie });
